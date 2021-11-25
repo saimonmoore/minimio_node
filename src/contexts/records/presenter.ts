@@ -10,9 +10,7 @@ class CollectionPresenter {
   total: number;
 
   constructor(records: Record[]) {
-    this.collection = records.map((record: Record) =>
-      presenter(record),
-    );
+    this.collection = records.map((record: Record) => presenter(record));
     this.total = this.collection.length;
   }
   render() {

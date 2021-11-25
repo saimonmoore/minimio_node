@@ -12,10 +12,7 @@ describe('controller', () => {
   describe('POST /rest/mnimio/records', () => {
     const makeRequest = (payload, rid?: string | number) =>
       request(server)
-        .post(
-          `/rest/mnimio/records${rid ? ` ? rid = ${rid}` : ''
-          }`,
-        )
+        .post(`/rest/mnimio/records${rid ? ` ? rid = ${rid}` : ''}`)
         .set('Content-Type', 'application/json')
         .send(payload);
 
@@ -55,10 +52,7 @@ describe('controller', () => {
 
     describe('when minimum required record params are given', () => {
       it('creates a record resource', async () => {
-        const res = await makeRequest(
-          { record: { id: 1, title: 'foo' } },
-          rid,
-        );
+        const res = await makeRequest({ record: { id: 1, title: 'foo' } }, rid);
 
         expect(res.status).toEqual(201);
       });

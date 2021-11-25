@@ -2,17 +2,17 @@
 import { ProxyError, AppError, AuthError } from '../errors';
 import logger from '../utils/logger';
 import config from '../config';
-const logErrors = ['development'].includes(
-  config.appEnv(),
-);
+const logErrors = ['development'].includes(config.appEnv());
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const errorHandler = (err: any, req: any, res: any, _next: any) => {
   if (logErrors) {
     logger.info(
-      `[${req.method as string}] ${req.originalUrl as string} params: ${JSON.stringify(
-        req.params,
-      )} body: ${JSON.stringify(req.body)}`,
+      `[${req.method as string}] ${
+        req.originalUrl as string
+      } params: ${JSON.stringify(req.params)} body: ${JSON.stringify(
+        req.body,
+      )}`,
     );
     logErrors && logger.error(err.stack);
     if (err.response) {

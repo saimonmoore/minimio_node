@@ -35,11 +35,11 @@ describe('i18n', () => {
   });
 
   describe('getAvailableLanguage', () => {
-    it('returns the user selected language if english', function() {
+    it('returns the user selected language if english', function () {
       expect(getAvailableLanguage('en')).toEqual('en');
     });
 
-    it('returns the fallback language if neither english nor german', function() {
+    it('returns the fallback language if neither english nor german', function () {
       expect(getAvailableLanguage('es')).toEqual('de');
     });
   });

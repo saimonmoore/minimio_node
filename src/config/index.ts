@@ -5,11 +5,7 @@ const fileSuffix = nodeEnv ? `.${nodeEnv}` : '';
 
 dotenv.config({ path: `.env${fileSuffix}` });
 
-const {
-  APP_ENV,
-  PORT,
-  LOG_LEVEL,
-} = process.env as {
+const { APP_ENV, PORT, LOG_LEVEL } = process.env as {
   APP_ENV: KeysEnvPartitions;
   [key: string]: any;
 };

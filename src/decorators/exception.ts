@@ -9,7 +9,7 @@ export const returnOnException =
 
     const errorHandler = () => value;
 
-    descriptor.value = function(...args) {
+    descriptor.value = function (...args) {
       try {
         const result = method.apply(this, args);
         const isPromise = isFunction(result?.then) && isFunction(result?.catch);
@@ -27,36 +27,36 @@ export const returnOnException =
 
 export const throwException =
   <T extends Newable<Error>>(constructor: T) =>
-    (_: any, __: string, descriptor: PropertyDescriptor) => {
-      const method = descriptor.value;
+  (_: any, __: string, descriptor: PropertyDescriptor) => {
+    const method = descriptor.value;
 
-      const errorHandler = (error) => {
-        let extendedError: Error;
+    const errorHandler = (error) => {
+      let extendedError: Error;
 
-        try {
-          extendedError = new constructor(error.message);
-        } catch (_) {
-          throw error;
-        }
+      try {
+        extendedError = new constructor(error.message);
+      } catch (_) {
+        throw error;
+      }
 
-        throw extendedError;
-      };
-
-      descriptor.value = function(...args) {
-        try {
-          const result = method.apply(this, args);
-          const isPromise = isFunction(result?.then) && isFunction(result?.catch);
-
-          if (isPromise) {
-            return result.catch(errorHandler);
-          }
-
-          return result;
-        } catch (error) {
-          return errorHandler(error);
-        }
-      };
+      throw extendedError;
     };
+
+    descriptor.value = function (...args) {
+      try {
+        const result = method.apply(this, args);
+        const isPromise = isFunction(result?.then) && isFunction(result?.catch);
+
+        if (isPromise) {
+          return result.catch(errorHandler);
+        }
+
+        return result;
+      } catch (error) {
+        return errorHandler(error);
+      }
+    };
+  };
 
 export const captureException =
   () => (_: any, __: string, descriptor: PropertyDescriptor) => {
@@ -68,7 +68,7 @@ export const captureException =
       throw error;
     };
 
-    descriptor.value = function(...args) {
+    descriptor.value = function (...args) {
       try {
         const result = method.apply(this, args);
         const isPromise = isFunction(result?.then) && isFunction(result?.catch);

@@ -1,7 +1,4 @@
-import {
-  Presenter,
-  CollectionPresenter,
-} from '../presenter';
+import { Presenter, CollectionPresenter } from '../presenter';
 
 describe('XPresenter', () => {
   describe('#render', () => {
@@ -24,21 +21,15 @@ describe('XPresenter', () => {
 describe('CollectionPresenter', () => {
   describe('#render', () => {
     it('returns a total', () => {
-      const presenter = new CollectionPresenter(
-        [{ id: 1, title: 'foo' }]
-      );
+      const presenter = new CollectionPresenter([{ id: 1, title: 'foo' }]);
 
       expect(presenter.render().total).toEqual(1);
     });
 
     it('returns the rendered collection', () => {
-      const presenter = new CollectionPresenter(
-        [{ id: 1, title: 'foo' }]
-      );
+      const presenter = new CollectionPresenter([{ id: 1, title: 'foo' }]);
 
-      expect(presenter.render().collection).toEqual([
-        { id: 1, title: 'foo' }
-      ]);
+      expect(presenter.render().collection).toEqual([{ id: 1, title: 'foo' }]);
     });
   });
 });

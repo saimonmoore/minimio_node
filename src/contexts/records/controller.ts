@@ -1,14 +1,11 @@
 // import Service from './service';
 import {
   baseHandler,
-  // filterParams, 
+  // filterParams,
   // allowedParams
 } from '../baseController';
 import { BadRequestError } from '../../errors';
-import {
-  CollectionPresenter,
-  Presenter,
-} from './presenter';
+import { CollectionPresenter, Presenter } from './presenter';
 
 // const indexGetParams = (req: any) => {
 //   const { rid } = req.query;
@@ -18,25 +15,18 @@ import {
 //   };
 // };
 
-export const index = baseHandler(
-  (
-    _req: any,
-    res: any,
-    next: any,
-  ) => {
-    // const whereParams = indexGetParams(req);
+export const index = baseHandler((_req: any, res: any, next: any) => {
+  // const whereParams = indexGetParams(req);
 
-    try {
+  try {
+    const feeds = [];
+    const response = new CollectionPresenter(feeds).render();
 
-      const feeds = [];
-      const response = new CollectionPresenter(feeds).render();
-
-      res.json(response);
-    } catch (error) {
-      next(error);
-    }
-  },
-);
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
 
 export const showGetParams = (req: any) => {
   const {
@@ -56,47 +46,35 @@ export const showGetParams = (req: any) => {
   };
 };
 
-export const show = baseHandler(
-  (
-    _req: any,
-    res: any,
-    next: any,
-  ) => {
-    try {
-      // const { id, rid } = showGetParams(req);
-      const feed = { id: 1, title: 'mnimio' };
-      const response = new Presenter(feed).render();
+export const show = baseHandler((_req: any, res: any, next: any) => {
+  try {
+    // const { id, rid } = showGetParams(req);
+    const feed = { id: 1, title: 'mnimio' };
+    const response = new Presenter(feed).render();
 
-      res.json(response);
-    } catch (error) {
-      next(error);
-    }
-  },
-);
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
 
-export const create = baseHandler(
-  (
-    _req: any,
-    res: any,
-    next: any,
-  ) => {
-    try {
-      // const {
-      //   body: { feedData },
-      //   query: { rid },
-      // } = req;
+export const create = baseHandler((_req: any, res: any, next: any) => {
+  try {
+    // const {
+    //   body: { feedData },
+    //   query: { rid },
+    // } = req;
 
-      // const params = {
-      //   ...filterParams(feedData, allowedParams('feed', req)),
-      //   creator_id: parseInt(rid),
-      // };
+    // const params = {
+    //   ...filterParams(feedData, allowedParams('feed', req)),
+    //   creator_id: parseInt(rid),
+    // };
 
-      // const feed = await Service.create(params);
-      const feed = {};
-      const response = new Presenter(feed).render();
-      res.status(201).json(response);
-    } catch (unexpectedError) {
-      next(unexpectedError);
-    }
-  },
-);
+    // const feed = await Service.create(params);
+    const feed = {};
+    const response = new Presenter(feed).render();
+    res.status(201).json(response);
+  } catch (unexpectedError) {
+    next(unexpectedError);
+  }
+});

@@ -30,10 +30,7 @@ const startServer = async (): Promise<Express> => {
   server.use(express.urlencoded({ extended: true }));
   server.use(express.json());
 
-  server.use(
-    '/rest/mnimio/apidoc/rest.yml',
-    express.static(apiSpec),
-  );
+  server.use('/rest/mnimio/apidoc/rest.yml', express.static(apiSpec));
 
   server.get('/_system/alive', (_req: any, res: any) => {
     res.status(200).set('Content-Type', 'text/plain').send('ALIVE');

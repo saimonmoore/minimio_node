@@ -1,11 +1,8 @@
 import { Record } from './type';
-import {
-  AppError,
-} from '../../errors';
+import { AppError } from '../../errors';
 
 class Service {
-  static createRecord = (params: any) =>
-    new Service().create(params);
+  static createRecord = (params: any) => new Service().create(params);
 
   create(_params: any) {
     try {

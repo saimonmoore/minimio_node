@@ -1,7 +1,4 @@
-export type RecordResponse = Omit<
-  Record,
-  'foo'
-> & {
+export type RecordResponse = Omit<Record, 'foo'> & {
   bar?: boolean;
 };
 

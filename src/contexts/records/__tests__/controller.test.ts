@@ -12,10 +12,8 @@ jest.mock('../service', () => {
 let server: any;
 
 const mockCreateRecord = ({ resolve, reject }: any) => {
-  if (resolve)
-    (Service.createRecord as any).mockResolvedValue(resolve);
-  if (reject)
-    (Service.createRecord as any).mockRejectedValue(reject);
+  if (resolve) (Service.createRecord as any).mockResolvedValue(resolve);
+  if (reject) (Service.createRecord as any).mockRejectedValue(reject);
   return Service.createRecord;
 };
 
@@ -25,9 +23,7 @@ describe('Records', () => {
   describe('POST /rest/mnimio/records', () => {
     const makeRequest = (params: any) =>
       request(server)
-        .post(
-          `/rest/mnimio/records?rid=1`,
-        )
+        .post(`/rest/mnimio/records?rid=1`)
         .set('Content-Type', 'application/json')
         .send(params);
 
@@ -63,12 +59,10 @@ describe('Records', () => {
         const res = await makeRequest(params);
 
         expect(mockedCreateRecordFn).toHaveBeenCalled();
-        expect(mockedCreateRecordFn).toHaveBeenCalledWith(
-          {
-            id: 1,
-            title: 'foo'
-          }
-        );
+        expect(mockedCreateRecordFn).toHaveBeenCalledWith({
+          id: 1,
+          title: 'foo',
+        });
         expect(res.status).toEqual(201);
         expect(res.body).toEqual({ id: 1, title: 'foo' });
       });
