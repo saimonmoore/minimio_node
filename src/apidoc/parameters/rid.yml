@@ -1,0 +1,6 @@
+in: query
+name: 'rid'
+description: 'The creator id'
+schema:
+  type: integer
+required: true

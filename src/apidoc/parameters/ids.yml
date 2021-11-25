@@ -1,0 +1,10 @@
+in: query
+name: 'ids'
+description: 'Array of ids'
+schema:
+  type: array
+  items:
+    type: integer
+required: true
+style: form
+allowReserved: true

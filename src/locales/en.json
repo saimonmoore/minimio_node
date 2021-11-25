@@ -1,0 +1,13 @@
+{
+  "BACKEND_BAD_REQUEST": "Malformed request",
+  "BACKEND_INVALID_RECORD": "Invalid Record",
+  "BACKEND_REQUESTER_NOT_AUTHORIZED": "Unfortunately the requester doesn't have permission for that.",
+  "BACKEND_UNKNOWN_ERROR": "An unknown error has occured.",
+  "BACKEND_FIELD_EMPTY": "Please fill in the mandatory field {{field}}.",
+  "BACKEND_FIELD_INVALID": "The field {{field}} is invalid.",
+  "BACKEND_FIELD_NOT_NUMBER": "Please only use digits in field {{field}}.",
+  "BACKEND_FIELD_NOT_BOOLEAN": "The field {{field}} must be either true or false.",
+  "BACKEND_FIELD_TOO_LONG": "The field {{field}} contains too many characters.",
+  "BACKEND_FIELD_OUT_OF_BOUNDS": "The field {{field}} is not a valid value.",
+  "BACKEND_FIELD_WRONG_VALUE": "The field {{field}} is not available.",
+}

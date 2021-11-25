@@ -1,0 +1,5 @@
+in: query
+name: 'offset'
+description: 'The offset at which to begin'
+schema:
+  type: integer

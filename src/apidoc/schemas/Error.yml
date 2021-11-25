@@ -1,0 +1,8 @@
+required:
+  - localization_key
+  - localization_value
+properties:
+  localization_key:
+    type: string
+  localization_value:
+    type: string

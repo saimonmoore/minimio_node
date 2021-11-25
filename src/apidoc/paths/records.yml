@@ -1,0 +1,79 @@
+/records/{id}:
+  get:
+    description: 'Returns a specific record'
+    x-eov-operation-id: 'show'
+    x-eov-operation-handler: 'contexts/records/controller'
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/rid'
+    responses:
+      200:
+        description: 'Success'
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - record
+              properties:
+                record:
+                  $ref: '#/components/schemas/Record'
+      400:
+        $ref: '#/components/responses/Error'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      default:
+        $ref: '#/components/responses/Error'
+/records:
+  get:
+    description: 'Returns collection of records'
+    x-eov-operation-id: 'index'
+    x-eov-operation-handler: 'contexts/records/controller'
+    parameters:
+      - $ref: '#/components/parameters/rid'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+    responses:
+      200:
+        description: 'Success'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordCollection'
+      default:
+        $ref: '#/components/responses/Error'
+  post:
+    description: 'Creates a new record'
+    x-eov-operation-id: 'create'
+    x-eov-operation-handler: 'contexts/records/controller'
+    parameters:
+      - $ref: '#/components/parameters/rid'
+    requestBody:
+      description: Callback payload
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - record
+            properties:
+              record:
+                $ref: '#/components/schemas/RecordInput'
+    responses:
+      201:
+        description: 'Record created'
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - record
+              properties:
+                record:
+                  $ref: '#/components/schemas/Record'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      422:
+        $ref: '#/components/responses/UnprocessableEntity'

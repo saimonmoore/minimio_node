@@ -1,0 +1,105 @@
+{
+  "name": "@mnimio/node",
+  "description": "p2p pocket clone",
+  "version": "0.0.1",
+  "private": true,
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "always",
+    "proseWrap": "always"
+  },
+  "engines": {
+    "node": ">=14",
+    "npm": ">=6"
+  },
+  "main": "src/entry.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json; cp -fr ./src/apidoc ./dist",
+    "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/entry.ts",
+    "start:debug": "node --inspect-brk -r sucrase/register dist/entry.js",
+    "test": "NODE_ENV=test LOG_LEVEL=error jest --no-cache --runInBand",
+    "test:build": "tsc --incremental false",
+    "test:all": "yarn test:unit; yarn test:integration",
+    "test:unit": "NODE_ENV=test LOG_LEVEL=error jest --no-cache --testPathPattern='src.*\\.test\\.[jt]s' --testPathIgnorePatterns=\\.integration*",
+    "test:unit:watch": "NODE_ENV=test LOG_LEVEL=error jest --watchAll --no-cache --runInBand --testPathPattern=src.*\\.test\\.[jt]s --testPathIgnorePatterns=\\.integration\\.test\\.[jt]s",
+    "test:unit:coverage": "NODE_ENV=test LOG_LEVEL=error jest --coverage --no-cache --runInBand --testPathPattern=src.*\\.test\\.[jt]s --testPathIgnorePatterns=\\.integration\\.test\\.[jt]s",
+    "test:unit:debug": "NODE_ENV=test node --inspect-brk --inspect node_modules/.bin/jest -i --no-cache --runInBand --testPathPattern=src.*\\.test\\.[jt]s --testPathIgnorePatterns=\\.integration\\.test\\.[jt]s",
+    "test:integration": "LOG_LEVEL=error NODE_ENV=test DB_TEST=true dotenv -e .env.test -o -- jest --detectOpenHandles --no-cache --runInBand --forceExit --testPathPattern=src.*\\integration\\.test\\.[jt]s",
+    "test:integration:one": "LOG_LEVEL=error NODE_ENV=test DB_TEST=true dotenv -e .env.test -o -- jest --detectOpenHandles --no-cache --runInBand --forceExit",
+    "test:integration:watch": "LOG_LEVEL=error NODE_ENV=test DB_TEST=true jest --watchAll --detectOpenHandles --no-cache --forceExit --testPathPattern=src.*\\integration\\.test\\.[jt]s",
+    "test:integration:debug": "NODE_ENV=test DB_TEST=true node --inspect-brk --inspect node_modules/.bin/jest -i --no-cache --runInBand --testPathPattern=src.*\\.test\\.[jt]s --testPathIgnorePatterns=\\.integration\\.test\\.[jt]s",
+    "lint": "eslint ./src --ext .js,.ts --fix",
+    "prettify": "prettier --write src/**/*.ts",
+    "buildApiSpec": "node_modules/yamlinc/bin/yamlinc --output src/apidoc/rest.yml src/apidoc/rest.base.yml",
+    "postinstall": "yarn buildApiSpec"
+  },
+  "eslintIgnore": [
+    "dist/**/*",
+    "node_modules/**/*"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts}": [
+      "eslint ./src --ext .js,.ts --fix --max-warnings=0",
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.21.4",
+    "class-validator": "^0.11.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-openapi-validator": "^4.13.2",
+    "i18next-node-fs-backend": "^2.1.3",
+    "morgan": "^1.10.0",
+    "winston": "^3.3.3",
+    "yamlinc": "^0.1.10"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.17",
+    "@babel/core": "^7.12.17",
+    "@babel/node": "^7.12.17",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-proposal-decorators": "^7.10.3",
+    "@babel/plugin-transform-runtime": "^7.12.17",
+    "@babel/preset-env": "^7.12.17",
+    "@types/bluebird": "^3.5.34",
+    "@types/crypto-js": "^4.0.1",
+    "@types/express": "^4.17.11",
+    "@types/i18next-node-fs-backend": "^2.1.0",
+    "@types/ioredis": "^4.26.3",
+    "@types/jest": "^26.0.24",
+    "@types/morgan": "^1.9.2",
+    "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
+    "axios-mock-adapter": "1.18.1",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-preset-env": "^1.7.0",
+    "date-fns": "^2.16.1",
+    "dotenv-override-cli": "^4.0.1",
+    "eslint": "^7.29.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.6",
+    "faker": "^4.1.0",
+    "husky": "^3.1.0",
+    "jest": "^26.6.3",
+    "jest-fetch-mock": "^3.0.3",
+    "jest-mock-extended": "^2.0.4",
+    "lint-staged": "^9.4.3",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.3.2",
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.5.6",
+    "ts-node": "^8.10.2",
+    "typescript": "^4.3.5"
+  }
+}

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Usage: 
+# > execute(async () => await foo());
+node -i -e "$(< ./dist/repl.js)"

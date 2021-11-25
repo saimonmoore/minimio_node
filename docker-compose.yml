@@ -1,0 +1,34 @@
+version: '3.5'
+services:
+  app:
+    container_name: mnimio_node
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    image: mnimio_node
+    command: yarn start
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://0.0.0.0:3000/_system/alive']
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    tty: true
+    stdin_open: true
+    ports:
+      - '3000:3000'
+      - '16124:16124'
+    env_file:
+      - .env.docker-compose
+    environment:
+    volumes:
+      - .:/app:delegated
+      - yarn_cache:/yarn
+      - node_modules_cache:/app/node_modules
+volumes:
+  yarn_cache:
+  node_modules_cache:
+
+networks:
+  default:
+    external: true
+    name: development

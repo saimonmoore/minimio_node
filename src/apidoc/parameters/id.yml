@@ -1,0 +1,6 @@
+in: path
+name: 'id'
+description: 'The record id'
+schema:
+  type: integer
+required: true

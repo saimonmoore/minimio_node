@@ -1,0 +1,11 @@
+required:
+  - field
+  - errors
+type: object
+properties:
+  field:
+    type: string
+  errors:
+    type: array
+    items:
+      $ref: '#/components/schemas/Error'

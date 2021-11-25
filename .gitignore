@@ -1,0 +1,32 @@
+# Deployment directories
+node_modules
+dist
+# Optional npm cache directory
+.npm
+# Mac
+.DS_Store
+.history/
+.vscode/
+
+#Docker
+.dockerignore
+Dockerfile-generated.release
+
+#Dotenv
+.env
+
+#Test
+coverage
+
+#Sonarqube
+.scannerwork
+
+#Yarn error log
+yarn-error.log
+.idea
+
+#Dynamically generated files
+src/apidoc/rest.yml
+
+# TypeScript
+tsconfig.tsbuildinfo

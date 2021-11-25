@@ -1,0 +1,43 @@
+#!/bin/bash
+
+if [[ -z "$TAG" ]]; then
+    echo "Must provide TAG!" 1>&2
+    exit 1
+fi
+
+if [[ -z "$GIT_BRANCH" ]]; then
+    echo "Must provide GIT_BRANCH!" 1>&2
+    exit 1
+fi
+
+: ${IMAGE_NAME:=quay.dc.xing.com/erecruiting-sourcing-service/erecruiting-sourcing-service-backend}
+
+findTagLocally() {
+  echo "info: Checking for ${TAG} locally..."
+  docker image ls "${IMAGE_NAME}:${TAG}" &> /dev/null
+  RESULT="$?"
+  echo $RESULT
+}
+
+findTagRemotely() {
+  echo "info: Checking for ${TAG} remotely..."
+  docker pull "${IMAGE_NAME}:${TAG}" &> /dev/null
+  RESULT="$?"
+  echo $RESULT
+}
+
+if [ "$(findTagLocally)" == "0" ]; then
+  echo "info: TAG: ${TAG} found locally, skipping build..."
+elif [ "$(findTagRemotely)" == "0" ]; then
+  echo "info: TAG: ${TAG} found remotely, skipping build..."
+else
+  echo "info: TAG: ${TAG} not found, building temporary tag..."
+  docker-build --label quay.expires-after="10d" --tag=${TAG} --tag=${GIT_BRANCH} . --target dev
+  result="$?"
+  if [ "${result}" == "0" ]; then
+    echo "info: TAG: ${TAG} built locally. Pushing to quay..."
+    docker push "${IMAGE_NAME}:${TAG}"
+    echo "info: GIT_BRANCH: ${GIT_BRANCH} built locally. Pushing to quay..."
+    docker push "${IMAGE_NAME}:${GIT_BRANCH}"
+  fi
+fi

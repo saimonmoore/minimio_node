@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: 'Mnimio REST Api'
+  version: 0.0.1
+servers:
+  - url: /rest/mnimio/
+paths:
+  $include: "./paths/records.yml"
+components:
+  parameters:
+    id:
+      $include: "./parameters/id.yml"
+    limit:
+      $include: "./parameters/limit.yml"
+    offset:
+      $include: "./parameters/offset.yml"
+    rid:
+      $include: "./parameters/rid.yml"
+  schemas:
+    RecordCommon:
+      $include: "./schemas/Record/RecordCommon.yml"
+    RecordInput:
+      $include: "./schemas/Record/RecordInput.yml"
+    Record:
+      $include: "./schemas/Record/Record.yml"
+    RecordCollection:
+      $include: "./schemas/Record/RecordCollection.yml"
+    Error:
+      $include: "./schemas/Error.yml"
+    FieldError:
+      $include: "./schemas/FieldError.yml"
+    InvalidRecordError:
+      $include: "./schemas/InvalidRecordError.yml"
+  responses:
+    Error:
+      $include: "./responses/Error.yml"
+    UnprocessableEntity:
+      $include: "./responses/UnprocessableEntity.yml"
+    BadRequest:
+      $include: "./responses/BadRequest.yml"
+    Forbidden:
+      $include: "./responses/Forbidden.yml"
+    NotFound:
+      $include: "./responses/NotFound.yml"
+    Unauthorized:
+      $include: "./responses/Unauthorized.yml"

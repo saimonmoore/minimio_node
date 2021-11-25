@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "incremental": false,
+    "noEmit": false
+  },
+  "exclude": ["node_modules", "src/**/*.test.*", "src/__mocks__", "src/**/__mocks__"]
+}

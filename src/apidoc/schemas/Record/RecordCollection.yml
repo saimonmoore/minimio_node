@@ -1,0 +1,11 @@
+required:
+  - collection
+  - total
+type: object
+properties:
+  total:
+    type: integer
+  collection:
+    type: array
+    items:
+      $ref: '#/components/schemas/Record'

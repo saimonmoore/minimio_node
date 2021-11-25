@@ -1,0 +1,5 @@
+in: query
+name: 'limit'
+description: 'The number of items to return'
+schema:
+  type: integer
